@@ -1,86 +1,68 @@
 package org.example;
 
+import java.util.Locale;
+
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutte
 public class Main {
     public Main() {
     }
 
-    public static String fizzbuzz(int number) {
+    public static String fizzBuzz(int number) {
         if (number % 5 == 0 && number % 7 == 0) {
             return "fizzbuzz";
         } else if (number % 5 == 0) {
             return "fizz";
+        } else if (number % 7 == 0) {
+            return "buzz";
         } else {
-            return number % 7 == 0 ? "buzz" : Integer.toString(number);
+            return String.valueOf(number);
         }
     }
 
-    public static String reverseStr(String string) {
-        String result = "";
-
-        for(int index = string.length() - 1; index >= 0; --index) {
-            result = result + string.charAt(index);
+    public static String reverseString(String str) {
+        StringBuilder reversed = new StringBuilder();
+        for (int i = str.length() - 1; i >= 0; i--) {
+            reversed.append(str.charAt(i));
         }
-
-        return result;
+        return reversed.toString();
     }
 
-    public static double[] quadraticEquation(double a, double b, double c) throws Exception {
-        double D = b * b - 4.0 * a * c;
-        double[] x;
-
-        if (a == 0) {
-            throw new Exception("Its not quadratic equation");
-        }
-
-        if (D > 0.0) {
-            x = new double[]{(-b + Math.sqrt(D)) / (2.0 * a), (-b - Math.sqrt(D)) / (2.0 * a)};
-            return x;
-        } else if (D == 0.0) {
-            x = new double[]{-b / (2.0 * a)};
-            return x;
+    public static String quadraticEquation(int a, int b, int c) {
+        double discriminant = b * b - 4 * a * c;
+        if (discriminant >= 0) {
+            double x1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+            double x2 = (b - Math.sqrt(discriminant)) / (2 * a);
+            return String.format(Locale.ENGLISH, "%.1f, %.1f", x1, x2);
         } else {
-            throw new Exception("There are no real roots");
+            return "there are no real roots";
         }
     }
 
-    public static double sumSerias() {
-        double n = 2.0;
-        double sum = 0.0;
-        double memberSerias;
+    public static double sumOfSeries(int iterations) {
+        double sum = 0;
+        double term = 1.0 / (2 * 2 + 2 - 2);
+        int n = 2;
 
-        do {
-            memberSerias = 1.0 / (n * n + n - 2.0);
-            sum += memberSerias;
-            n += 1.0;
-        } while(memberSerias >= Math.pow(10.0, -6.0));
-
+        while (term >= Math.pow(10, -6)) {
+            sum += term;
+            n++;
+            term = 1.0 / (n * n + n - 2);
+        }
         return sum;
     }
 
-    public static boolean polindrom(String string) {
-        int half;
-        string = string.toLowerCase();
-
-        if (string.length() % 2 == 0) {
-            half = string.length() / 2;
-        } else {
-            half = (string.length() - 1) / 2;
-        }
-
-        for (int index = 0; index < half; ++index) {
-            if (string.charAt(index) != string.charAt(string.length() - 1 - index)) {
+    public static boolean isPalindrome(String str) {
+        str = str.toLowerCase();
+        int left = 0;
+        int right = str.length() - 1;
+        while (left < right) {
+            if (str.charAt(left) != str.charAt(right)) {
                 return false;
             }
+            left++;
+            right--;
         }
-
         return true;
-    }
-
-    public static void main(String[] args) {
-        for (int number = 1; number <= 500; ++number) {
-            System.out.println(fizzbuzz(number));
-        }
     }
 }

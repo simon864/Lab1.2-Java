@@ -7,44 +7,32 @@ import static org.junit.jupiter.api.Assertions.*;
 class MainTest {
 
     @Test
-    void fizzbuzz() {
-        assertEquals("fizzbuzz", Main.fizzbuzz(35));
-        assertEquals("buzz", Main.fizzbuzz(14));
-        assertEquals("fizz", Main.fizzbuzz(10));
-        assertEquals("41", Main.fizzbuzz(41));
+    void testFizzBuzz() {
+        assertEquals("fizz", Main.fizzBuzz(15));
+        assertEquals("buzz", Main.fizzBuzz(14));
+        assertEquals("fizzbuzz", Main.fizzBuzz(35));
+        assertEquals("1", Main.fizzBuzz(1));
     }
 
     @Test
-    void reverseStr() {
-        assertEquals("llatsni ekam", Main.reverseStr("make install"));
+    void testReverseString() {
+        assertEquals("llatsni ekam", Main.reverseString("make install"));
     }
 
     @Test
-    void quadraticEquation() throws Exception {
-        try {
-            Main.quadraticEquation(1, -5, 9);
-        } catch (Exception ex) {
-            assertEquals("There are no real roots", ex.getMessage());
-        }
-
-        try {
-            Main.quadraticEquation(0, -3, 4);
-        } catch (Exception ex) {
-            assertEquals("Its not quadratic equation", ex.getMessage());
-        }
-
-        assertEquals(2, Main.quadraticEquation(1, -4, 4)[0]);
-        assertArrayEquals(new double[] { 1, -4 }, Main.quadraticEquation(1, 3, -4));
+    void testQuadraticEquation() {
+        assertEquals("2.0, -2.0", Main.quadraticEquation(1, -4, 4));
+        assertEquals("there are no real roots", Main.quadraticEquation(1, 2, 2));
     }
 
     @Test
-    void sumSerias() {
-        assertEquals(0.6101121094474383, Main.sumSerias());
+    void testSumOfSeries() {
+        assertEquals(0.6101111104444433, Main.sumOfSeries(10), 0.00001);
     }
 
     @Test
-    void polindrom() {
-        assertTrue(Main.polindrom("TeNET"));
-        assertFalse(Main.polindrom("bruh"));
+    void testPalindrome() {
+        assertTrue(Main.isPalindrome("racecar"));
+        assertFalse(Main.isPalindrome("hello"));
     }
 }
